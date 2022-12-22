@@ -15,6 +15,15 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
+  pdf:
+    documentclass: scrreprt
+    papersize: A4
+    toc: true
+    number-sections: true
+    fontfamily: univers
+
+
+
 
 
 
