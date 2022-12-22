@@ -7,6 +7,8 @@ format:
     code-fold: true
     fig-height: 4
     fig-width: 5
+  pdf:
+    toc: true
 execute:
   freeze: true  # never re-render during project render
   warning: false
@@ -17,6 +19,8 @@ execute:
 ## Carregando bibliotecas
 
 ```{r}
+#| column: body-outset
+
 library(tidyverse)
 library(data.table)
 library(sf)
@@ -27,6 +31,8 @@ library(units)
 ## *locale* e *crs*
 
 ```{r}
+#| column: body-outset
+
 ##### Pesquisar depois e adaptar para utilizar o pacote geobr ao invés dos geopackages
 
 Sys.setenv(LANG = "English")
@@ -82,6 +88,8 @@ Proj_IBGE_area <- 'PROJCS["Conica_Equivalente_de_Albers_Brasil",
 ## Áreas urbanizadas 2015
 
 ```{r}
+#| column: body-outset
+
 Begin_time <- Sys.time()
 
 # Carrega camada do Areas urbanizadas
@@ -95,6 +103,8 @@ Tempo_areasurb <- end_time - Begin_time
 ## Municípios
 
 ```{r}
+#| column: body-outset
+
 start_time <- Sys.time()
 
 # Carrega camada dos municípios
@@ -114,7 +124,7 @@ gc()
 # Cria a sequência de geocódigos dos municípios
 ListaMun <- Municipios_proc$CD_GEOCODM
 # ListaMun <- Municipios_proc$CD_GEOCODM[Municipios_proc$NM_MUNICIP == "RIO DE JANEIRO"]
-ListaMun <- ListaMun[1]
+# ListaMun <- ListaMun[1]
 # ListaMun <- c("2307700", "2304202") # município que tá dando erro
 # ListaMun <- c("3124104", "3136652", "3130101", "3106705", "3162922", "3109006", "3140159", "3165537", "3149309",
 #               "3118601", "3154606", "3129806", "3106200", "3162955", "3144805", "3171204", "3117876", "3137601",
@@ -127,6 +137,8 @@ Tempo_municipios <- end_time - start_time
 ## *loop* de geoprocessamento
 
 ```{r}
+#| column: body-outset
+
 start_time <- Sys.time()
 
 # Cria a lista vazia para receber os data.frames / sf interseccionados e com áreas calculadas
@@ -208,6 +220,8 @@ Tempo_geoproc <- end_time - start_time
 ## Consolidação da tabela de cálculo e limpeza da memória
 
 ```{r}
+#| column: body-outset
+
 start_time <- Sys.time()
 
 # consolida a tabela de calculo a partir da lista de tabelas
@@ -224,6 +238,8 @@ Tempo_cons <- end_time - start_time
 ## Somatório das áreas por setor / classe
 
 ```{r}
+#| column: body-outset
+
 start_time <- Sys.time()
 
 # remove as unidades de área (m^2)
@@ -257,6 +273,8 @@ Tempo_calcarea <- end_time - start_time
 ## Preparo da tabela para procedimento de otimização
 
 ```{r}
+#| column: body-outset
+
 start_time <- Sys.time()
 
 # remove segmentos sem associacao com grade ou setor (problemas de topologia)
@@ -325,6 +343,8 @@ Tempo_tabela <- end_time - start_time
 ## Declaração das variáveis e funcões para otimização
 
 ```{r}
+#| column: body-outset
+
 start_time <- Sys.time()
 
 par.ini <- c(1, 1, 1, 1)
@@ -368,6 +388,8 @@ Tempo_vars <- end_time - start_time
 ## Cálculo dos coeficientes - população - subdistrito
 
 ```{r}
+#| column: body-outset
+
 start_time <- Sys.time()
 
 for (i in Subd) {
@@ -393,6 +415,8 @@ Tempo_subdist_pop <- end_time - start_time
 ## Cálculo dos coeficientes - domicílio - subdistrito
 
 ```{r}
+#| column: body-outset
+
 start_time <- Sys.time()
 
 for (i in Subd) {
@@ -418,6 +442,8 @@ Tempo_subdist_dom <- end_time - start_time
 ## Cálculo dos coeficientes - população - distrito
 
 ```{r}
+#| column: body-outset
+
 start_time <- Sys.time()
 
 for (i in Dist) {
@@ -443,6 +469,8 @@ Tempo_dist_pop <- end_time - start_time
 ## Cálculo dos coeficientes - domicílio - distrito
 
 ```{r}
+#| column: body-outset
+
 start_time <- Sys.time()
 
 for (i in Dist) {
@@ -468,6 +496,8 @@ Tempo_dist_dom <- end_time - start_time
 ## Cálculo dos coeficientes - população - municípios
 
 ```{r}
+#| column: body-outset
+
 start_time <- Sys.time()
 
 for (i in Mun) {
@@ -493,6 +523,8 @@ Tempo_mun_pop <- end_time - start_time
 ## Cálculo dos coeficientes - domicílio - municípios
 
 ```{r}
+#| column: body-outset
+
 start_time <- Sys.time()
 
 for (i in Mun) {
@@ -518,6 +550,8 @@ Tempo_mun_dom <- end_time - start_time
 ## Etapas finais
 
 ```{r}
+#| column: body-outset
+
 start_time <- Sys.time()
 
 
