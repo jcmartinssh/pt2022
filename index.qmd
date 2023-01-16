@@ -9,6 +9,7 @@ format:
     fig-width: 5
   pdf:
     toc: true
+    toc-location: left
 execute:
   freeze: true  # never re-render during project render
   warning: false
